@@ -1,0 +1,104 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Container Styles */
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 90%;
+    margin: 60px auto;
+    flex-grow: 1;
+}
+
+/* Header Styles */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread out logo and title */
+    gap: 20px; /* Adjust the gap if necessary */
+    position: relative;
+}
+
+.logo {
+    width: 30%; /* Adjust size as needed */
+    height: auto;
+    position: absolute;
+    left: 0; /* Align the logo to the left edge of the container */
+}
+
+header h1 {
+    flex-grow: 1;
+    margin: 0 auto;
+    color: #333;
+    font-size: 2em;
+    text-align: center; /* Center the title */
+}
+
+header p {
+    color: #777;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+}
+
+/* Drop Area Styles */
+#drop-area {
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    padding: 40px;
+    background-color: #fafafa;
+    margin-bottom: 30px;
+}
+
+#drop-area:hover {
+    border-color: #bbb;
+    background-color: #f0f0f0;
+}
+
+.drag-text {
+    color: #aaa;
+    font-size: 1em;
+}
+
+#fileElem {
+    display: none;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #176e08;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1em;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Gallery Styles */
+#gallery {
+    text-align: left;
+    width: 100%;
+}
+
+#gallery p {
+    font-size: 18px;
+    color: #333;
+    margin-top: 20px;
+    word-wrap: break-word;
+}

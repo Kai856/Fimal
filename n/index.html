@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="images/logo.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Classifier</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <img src="images/logo.png" alt="Logo" class="logo">
+                <h1>Animal Classifier</h1>
+            </div>
+            <p>Upload or drag and drop an image to classify the animal</p>
+        </header>
+        
+        <div id="drop-area">
+            <form class="my-form">
+                <input type="file" id="fileElem" accept="image/*" onchange="handleFiles(this.files)">
+                <label class="button" for="fileElem">Select an Image</label>
+                <div class="drag-text">or drag and drop here</div>
+            </form>
+        </div>
+        
+        <div id="gallery"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
