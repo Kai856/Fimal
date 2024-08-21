@@ -4,30 +4,22 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/logo.png" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animal Classifier</title>
+    <title>Animal Classifier - Welcome</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="container">
+    <div class="main-container">
         <header>
-            <div class="header-content">
-                <img src="images/logo.png" alt="Logo" class="logo">
-                <h1>Animal Classifier</h1>
-            </div>
-            <p>Upload or drag and drop an image to classify the animal</p>
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <h1>Welcome to Animal Classifier</h1>
         </header>
         
-        <div id="drop-area">
-            <form class="my-form">
-                <input type="file" id="fileElem" accept="image/*" onchange="handleFiles(this.files)">
-                <label class="button" for="fileElem">Select an Image</label>
-                <div class="drag-text">or drag and drop here</div>
-            </form>
-        </div>
+        <section class="info">
+            <p>Our Animal Classifier project is designed to help you easily identify various animals from images. This tool leverages advanced machine learning algorithms to provide fast and accurate results.</p>
+            <p>Simply upload an image or drag and drop it to classify the animal in the picture.</p>
+        </section>
         
-        <div id="gallery"></div>
+        <button class="get-started" onclick="window.location.href='classifier.html'">Get Started</button>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
