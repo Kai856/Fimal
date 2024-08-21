@@ -3,8 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 import { collection, getDocs, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 import { query, orderBy, limit, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
-
+import { getStorage, ref } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-storage.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -19,7 +18,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const storage = getStorage(app);
 
 // Function to handle the file upload to Firebase
