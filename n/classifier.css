@@ -38,36 +38,6 @@ body {
     position: relative;
 }
 
-#displayArea {
-    padding: 60px 40px; /* Add padding for a more balanced look */
-    border-radius: 10px;
-    background-color: #fafafa;
-    margin-bottom: 40px;
-    height: auto;
-    border: 2px solid #ccc; /* Add a border to match the drop area */
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-    text-align: center; /* Center-align any content within the display area */
-    overflow: hidden; /* Hide any overflowing content */
-    display: none; /* Initially hidden, will be shown when content is present */
-}
-
-#displayArea {
-    display: none; /* Initially hidden */
-}
-
-#displayArea.active {
-    display: block; /* Make it visible when content is present */
-}
-
-
-.file-name {
- padding: 5px;
- margin-bottom: 5px;
- background-color: #f9f9f9;
- border: 1px solid #ddd;
- border-radius: 3px;
-        }
-
 header h1 {
     flex-grow: 1;
     margin: 0;
@@ -82,7 +52,6 @@ header p {
     font-size: 1.2em;
 }
 
-
 /* Drop Area Styles */
 #drop-area {
     border: 2px dashed #ccc;
@@ -92,6 +61,10 @@ header p {
     margin-bottom: 40px;
     height: auto;
     transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+#drop-area.active {
+    display: block;
 }
 
 #drop-area:hover {
@@ -119,6 +92,19 @@ header p {
 
 .button:hover {
     background-color: #039531;
+}
+
+/* File Name Display */
+.file-name {
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.hidden {
+    display: none;
 }
 
 /* Gallery Styles */

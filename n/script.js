@@ -20,35 +20,35 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-// Function to handle the file upload to Firebase
-function uploadToFirestore(file) {
-    const storageRef = ref(storage, `Images/${file.webkitRelativePath || file.name}`);
-
-    uploadBytes(storageRef, file).then((snapshot) => {
-        console.log(`Uploaded ${file.name} successfully!`);
-    }).catch((error) => {
-        console.error(`Failed to upload ${file.name}:`, error);
-    });
-}
 
 // When select image button gets clicked, identifies fileInput and applies function
-document.getElementById('fileInput').addEventListener('change', function() {
-    const fileInput = this;
-    console.log('File input change event triggered'); // Debugging output
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('fileInput').addEventListener('change', function() {
+        const fileInput = this;
+        const displayArea = document.getElementById("displayArea");
+        const dragText = document.querySelector('.drag-text');
 
-    if (fileInput.files.length === 1) {
-        displayOneFile(fileInput.files[0]); // Pass the single file object
-    } else if (fileInput.files.length > 1) {
-        displayFolder(fileInput.files); // Pass the FileList object (all files)
-    }
+        // Turn on the display area
+        displayArea.classList.add('active');
+        dragText.style.display = 'none';
+
+        // Clear the display area
+        displayArea.innerHTML = '';
+
+        if (fileInput.files.length === 1) {
+            displayOneFile(fileInput.files[0]); // Handle single file
+        } else if (fileInput.files.length > 1) {
+            displayFolder(fileInput.files); // Handle multiple files
+        }
+    });
 });
+
 
 function displayOneFile(file) {
     console.log('got here');
     const displayArea = document.getElementById("displayArea");
 
     // Clear displayArea
-    displayArea.innerHTML = '';
     const fileNameBox = document.createElement('div');
     fileNameBox.className = 'file-name';
     fileNameBox.textContent = file.name;
@@ -59,12 +59,25 @@ function displayFolder(files) {
     const displayArea = document.getElementById("displayArea");
 
     // Clear displayArea
-    displayArea.innerHTML = '';
 
     Array.from(files).forEach(file => {
         const fileNameBox = document.createElement('div');
         fileNameBox.className = 'file-name';
         fileNameBox.textContent = file.name;
         displayArea.appendChild(fileNameBox);
+    });
+}
+
+
+
+
+// Function to handle the file upload to Firebase
+function uploadToFirestore(file) {
+    const storageRef = ref(storage, `Images/${file.webkitRelativePath || file.name}`);
+
+    uploadBytes(storageRef, file).then((snapshot) => {
+        console.log(`Uploaded ${file.name} successfully!`);
+    }).catch((error) => {
+        console.error(`Failed to upload ${file.name}:`, error);
     });
 }
