@@ -5,16 +5,18 @@ import { collection, getDocs, addDoc, Timestamp } from "https://www.gstatic.com/
 import { query, orderBy, limit, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 import { getStorage, ref } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-storage.js";
 
-// Firebase configuration
+
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAxjhxw8VsuGcg_XG60UZ6yW0vL26dsaSs",
-  authDomain: "fimal-2c299.firebaseapp.com",
-  projectId: "fimal-2c299",
-  storageBucket: "fimal-2c299.appspot.com",
-  messagingSenderId: "326072839584",
-  appId: "1:326072839584:web:6a854b1502c94a1cb508c5",
-  measurementId: "G-YB4FY6EXSD",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -22,33 +24,30 @@ const storage = getStorage(app);
 
 
 // When select image button gets clicked, identifies fileInput and applies function
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('fileInput').addEventListener('change', function() {
-        const fileInput = this;
-        const displayArea = document.getElementById("displayArea");
-        const dragText = document.querySelector('.drag-text');
+document.getElementById('fileInput').addEventListener('change', function() {
+    const displayArea = document.getElementById("displayArea");
+    const dragText = document.querySelector('.drag-text');   
+    // turns on the display area 
+    dragText.style.display = 'none';   
+    // have fucntion to upload
+    displayArea.innerHTML = '';
 
-        // Turn on the display area
-        displayArea.classList.add('active');
-        dragText.style.display = 'none';
+    const uploadButton = document.createElement('button');
+    uploadButton.textContent = "Upload";
+    uploadButton.className = "button upload-button";
 
-        // Clear the display area
-        displayArea.innerHTML = '';
 
-        if (fileInput.files.length === 1) {
-            displayOneFile(fileInput.files[0]); // Handle single file
-        } else if (fileInput.files.length > 1) {
-            displayFolder(fileInput.files); // Handle multiple files
-        }
-    });
+    if (fileInput.files.length === 1) {
+        displayOneFile(fileInput.files[0]); // Pass the single file object
+    } else if (fileInput.files.length > 1) {
+        displayFolder(fileInput.files); // Pass the FileList object (all files)
+    }
+ 
 });
 
-
 function displayOneFile(file) {
-    console.log('got here');
     const displayArea = document.getElementById("displayArea");
 
-    // Clear displayArea
     const fileNameBox = document.createElement('div');
     fileNameBox.className = 'file-name';
     fileNameBox.textContent = file.name;
@@ -56,9 +55,9 @@ function displayOneFile(file) {
 }
 
 function displayFolder(files) {
+    console.log('got here');
     const displayArea = document.getElementById("displayArea");
 
-    // Clear displayArea
 
     Array.from(files).forEach(file => {
         const fileNameBox = document.createElement('div');
