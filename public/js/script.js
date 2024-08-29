@@ -1,36 +1,57 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
-import { collection, getDocs, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
-import { query, orderBy, limit, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
-import { getStorage, ref } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-storage.js";
-import { firebaseConfig} from '/js/config.js';
+import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-storage.js";
+import { firebaseConfig } from './config.js';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-// When select image button gets clicked, identifies fileInput and applies function
+console.log('Firebase app initialized:', app);
+console.log('Firebase storage initialized:', storage);
+
+
+
+
+
+
 document.getElementById('fileInput').addEventListener('change', function() {
     const displayArea = document.getElementById("displayArea");
-    const dragText = document.querySelector('.drag-text');   
-    // turns on the display area 
-    dragText.style.display = 'none';   
-    // have fucntion to upload
+    const dragText = document.querySelector('.drag-text');  
+    const selectButtonLabel = document.querySelector('label[for="fileInput"]'); 
+    const files = this.files;
+    selectButtonLabel.style.display = 'none';
+    dragText.style.display = 'none';  
     displayArea.innerHTML = '';
 
     const uploadButton = document.createElement('button');
+    uploadButton.id = "uploadButton";
     uploadButton.textContent = "Upload";
-    uploadButton.className = "button upload-button";
+    uploadButton.className = "button uploadButton";
+    console.log('Upload button created:', uploadButton);
 
+    displayArea.appendChild(uploadButton);
 
-    if (fileInput.files.length === 1) {
-        displayOneFile(fileInput.files[0]); // Pass the single file object
-    } else if (fileInput.files.length > 1) {
-        displayFolder(fileInput.files); // Pass the FileList object (all files)
+    if (this.files.length === 1) {
+        displayOneFile(this.files[0]);
+    } else if (this.files.length > 1) {
+        displayFolder(this.files);
     }
- 
+
+ document.addEventListener('DOMContentLoaded', (event) => {
+   uploadButton.addEventListener('click', function() {
+        console.log('Upload button clicked');
+        if (files.length === 1) { // Use 'this.files' here
+            uploadToFirestore(this.files[0]); 
+        } else if (this.files.length > 1) { 
+            Array.from(files).forEach((file, index) => {
+                console.log(`Uploading file ${index + 1} of ${this.files.length}:`, file.name);
+                uploadToFirestore(file, index);
+            });
+        }
+    });
 });
+});
+
 
 function displayOneFile(file) {
     const displayArea = document.getElementById("displayArea");
@@ -42,9 +63,7 @@ function displayOneFile(file) {
 }
 
 function displayFolder(files) {
-    console.log('got here');
     const displayArea = document.getElementById("displayArea");
-
 
     Array.from(files).forEach(file => {
         const fileNameBox = document.createElement('div');
@@ -54,16 +73,20 @@ function displayFolder(files) {
     });
 }
 
-
-
-
 // Function to handle the file upload to Firebase
-function uploadToFirestore(file) {
-    const storageRef = ref(storage, `Images/${file.webkitRelativePath || file.name}`);
+function uploadToFirestore(file, index) {
+    console.log('Uploading:', file.name);
 
+    // Creating a reference to the file path
+    const storageRef = ref(storage, `images/${index}_${file.webkitRelativePath || file.name}`);
+
+    // Upload the file
     uploadBytes(storageRef, file).then((snapshot) => {
         console.log(`Uploaded ${file.name} successfully!`);
     }).catch((error) => {
         console.error(`Failed to upload ${file.name}:`, error);
     });
 }
+ 
+ 
+ 
