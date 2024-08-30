@@ -10,10 +10,6 @@ console.log('Firebase app initialized:', app);
 console.log('Firebase storage initialized:', storage);
 
 
-
-
-
-
 document.getElementById('fileInput').addEventListener('change', function() {
     const displayArea = document.getElementById("displayArea");
     const dragText = document.querySelector('.drag-text');  
@@ -37,20 +33,38 @@ document.getElementById('fileInput').addEventListener('change', function() {
         displayFolder(this.files);
     }
 
- document.addEventListener('DOMContentLoaded', (event) => {
    uploadButton.addEventListener('click', function() {
         console.log('Upload button clicked');
-        if (files.length === 1) { // Use 'this.files' here
-            uploadToFirestore(this.files[0]); 
-        } else if (this.files.length > 1) { 
-            Array.from(files).forEach((file, index) => {
-                console.log(`Uploading file ${index + 1} of ${this.files.length}:`, file.name);
-                uploadToFirestore(file, index);
+            displayArea.innerHTML = '';
+            event.preventDefault()
+            const formData = new FormData();
+            Array.from(files).forEach(file => {
+                formData.append('file', file);
             });
-        }
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Attempt to parse JSON
+            })
+            .then(data => {
+                console.log("Prediction Result:", data.prediction);  // Debug print
+
+                Array.from(files).forEach((file, index) => {
+                displayArea.innerHTML = '';
+                const prediction = document.createElement('h2');
+                prediction.id = 'result';
+                prediction.textContent = `Prediction: ${data.prediction}`;
+                displayArea.appendChild(prediction)
+                });
+            })
+            .catch(error => console.error('Error:', error));            
+        });
     });
-});
-});
 
 
 function displayOneFile(file) {
