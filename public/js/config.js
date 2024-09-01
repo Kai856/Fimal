@@ -1,3 +1,6 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
+
 export const firebaseConfig = {
   apiKey: "AIzaSyAxjhxw8VsuGcg_XG60UZ6yW0vL26dsaSs",
   authDomain: "fimal-2c299.firebaseapp.com",
@@ -8,3 +11,6 @@ export const firebaseConfig = {
   appId: "1:326072839584:web:6a854b1502c94a1cb508c5",
   measurementId: "G-YB4FY6EXSD"
 };
+
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);

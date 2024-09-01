@@ -107,16 +107,40 @@ header p {
     display: none;
 }
 
-/* Gallery Styles */
-#gallery {
-    text-align: left;
-    width: 100%;
-    margin-top: 20px; /* Add spacing above the gallery */
+#gallery img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-#gallery p {
-    font-size: 18px;
-    color: #333;
-    margin-top: 20px;
-    word-wrap: break-word;
+#gallery img:hover {
+    transform: scale(1.05);
+    border-color: #4caf50;
 }
+
+/* Gallery styles */
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.uploaded-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.uploaded-image:hover {
+    transform: scale(1.05);
+    border-color: #4caf50;
+}
+

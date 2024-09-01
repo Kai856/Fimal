@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal Classifier</title>
-    <link rel="stylesheet" href="/css/classifier.css">
+    <link rel="stylesheet" href="css/classifier.css">
 </head>
 <body>
     <div class="container">
         <header>
             <div class="header-content">
-                <img src="/public/images/logo.png" alt="Logo" class="logo">
+                <img src="images/logo.png" alt="Logo" class="logo">
                 <h1>Animal Classifier</h1>
             </div>
             <p>Upload or drag and drop an image to classify the animal</p>
@@ -18,7 +18,7 @@
         
         <div id="drop-area">
             <form class="my-form">
-                 <input type="file" id="fileInput" multiple webkitdirectory style="display: none;" />
+                <input type="file" id="fileInput" accept="image/*" multiple style="display: none;" />
                 <label for="fileInput" class="button">Select an Image</label>
                 <div class="drag-text">or drag and drop here</div>
                 <div id="displayArea"></div>
@@ -26,8 +26,6 @@
         </div>
         <div id="gallery"></div>
     </div>
-   <script type="module" src="/js/script.js"></script> 
-
-
+   <script type="module" src="js/script.js"></script> 
 </body>
 </html>
