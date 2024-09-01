@@ -13,6 +13,6 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "vite": "^4.0.0"  // The version will be set when you install Vite
+    "vite": "^4.0.0" 
   }
 }
